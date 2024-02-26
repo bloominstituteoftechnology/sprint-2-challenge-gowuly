@@ -6,33 +6,115 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
+    
+      if (profile.active) {
+        if (!reason) {
+            return "confirm status manually";
+         }
+        profile.active = false;
+        profile.reason = reason;
+      } else {
+        profile.active = true;
+        delete profile.reason;
+        }
 
-    }
+          return profile;
+      }
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
+  
+       if (x < 1 || x > 3 || y < 1 || y > 3) {
+          return "invalid coordinates";
+        }
 
+       x -= 1;
+       y -= 1;
+
+      if (grid[y][x] === "🟥") {
+        return "🟥 💀";
+      } else if (grid[y][x] === "🟦") {
+        return "🟦 🥳";
+      }
     }
+
+    
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
+      for (let key in obj) {
+        if (key.length > 9) {
+            return "shorten all prop names to 9 chars or less";
+        }
+        
+        if (obj[key] === 0) {
+            obj[key] = false;
+        }
+        
+        else if (obj[key] === 1) {
+            obj[key] = true;
+        }
+        
+        else if (obj[key] === null) {
+            delete obj[key];
+        }
+      }
+   
+      return obj;
     }
+
+    
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+      let words = text.split(' ');
 
-    }
+      for (let i = 0; i < words.length; i++) {
+        if (forbidden.indexOf(words[i]) !== -1) {
+            words[i] = 'x'.repeat(words[i].length);
+          }
+         }
+         return words.join(' ');
+
+      }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
+      if (num.length !== 10) {
+        return "Invalid input";
+        }
+        return `(${num.substring(0, 3)}) ${num.substring(3, 6)}-${num.substring(6)}`;
+      }
 
-    }
+    
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
+      let throws = 0;
+      let counter = 0;
 
+      while (true) {
+        
+      let roll = Math.floor(Math.random() * 6) + 1;
+        throws++;
+
+        if (roll === 6) {
+            
+            counter++;
+            if (counter === 3) {
+                
+                break;
+            }
+        } else {
+            
+            counter = 0;
+        }
+      }
+
+    return throws;
     }
+
+    
 
     // 🧪 DO NOT make any changes below this line ===================
     globalThis.challengeVersion = 1
